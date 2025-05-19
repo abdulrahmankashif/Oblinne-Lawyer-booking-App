@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 98%;
+  --foreground: 222 47% 11%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  
+  /* Pakistani themed colors */
+  --primary: 210 100% 30%; /* Pakistani blue */
+  --primary-foreground: 0 0% 100%; /* white */
+  --secondary: 120 100% 20%; /* Pakistani green */
+  --secondary-foreground: 0 0% 100%; /* white */
+  
+  --accent: 210 40% 90%;
+  --accent-foreground: 222 47% 11%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 210 100% 30%;
+  --radius: 0.5rem;
+
+  /* Custom Pakistani themed colors */
+  --pakgreen: 120 100% 20%;
+  --pakblue: 210 100% 30%;
+  --paklightgray: 0 0% 96%;
+  --pakdarkgray: 220 17% 36%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  
+  /* Pakistani themed colors - dark mode */
+  --primary: 210 100% 40%; /* Pakistani blue - brighter for dark mode */
+  --primary-foreground: 0 0% 100%; /* white */
+  --secondary: 120 100% 30%; /* Pakistani green - brighter for dark mode */
+  --secondary-foreground: 0 0% 100%; /* white */
+  
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-opensans antialiased bg-background text-foreground;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-roboto font-bold;
+  }
+}
+
+@layer utilities {
+  .font-roboto {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .font-opensans {
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .font-urdu {
+    font-family: 'Noto Nastaliq Urdu', serif;
+    direction: rtl;
+  }
+  
+  .text-pakblue {
+    color: hsl(210, 100%, 30%);
+  }
+  
+  .text-pakgreen {
+    color: hsl(120, 100%, 20%);
+  }
+  
+  .text-pakdarkgray {
+    color: hsl(220, 17%, 36%);
+  }
+  
+  .bg-pakblue {
+    background-color: hsl(210, 100%, 30%);
+  }
+  
+  .bg-pakgreen {
+    background-color: hsl(120, 100%, 20%);
+  }
+  
+  .bg-paklightgray {
+    background-color: hsl(0, 0%, 96%);
+  }
+  
+  .border-pakblue {
+    border-color: hsl(210, 100%, 30%);
+  }
+  
+  .border-pakgreen {
+    border-color: hsl(120, 100%, 20%);
+  }
+  
+  .hover\:bg-pakblue:hover {
+    background-color: hsl(210, 100%, 30%);
+  }
+  
+  .hover\:bg-pakgreen:hover {
+    background-color: hsl(120, 100%, 20%);
+  }
+  
+  .hover\:text-pakblue:hover {
+    color: hsl(210, 100%, 30%);
+  }
+  
+  .hover\:text-pakgreen:hover {
+    color: hsl(120, 100%, 20%);
+  }
+  
+  .hover\:border-pakblue:hover {
+    border-color: hsl(210, 100%, 30%);
+  }
+  
+  .hover\:border-pakgreen:hover {
+    border-color: hsl(120, 100%, 20%);
+  }
+}
