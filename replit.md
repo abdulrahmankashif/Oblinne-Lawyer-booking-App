@@ -2,119 +2,116 @@
 
 ## Overview
 
-Oblinne is a web application that connects clients with qualified lawyers in Pakistan. The platform enables users to browse lawyers by specialty and location, view detailed lawyer profiles, and book consultations. The application features a modern, responsive interface with support for both English and Urdu languages, themed with Pakistani colors (green and blue).
+Oblinne is a **pure HTML, CSS, and JavaScript prototype** that connects clients with qualified lawyers in Pakistan. The platform enables users to browse lawyers by specialty and location, view detailed lawyer profiles, and book consultations. The application features a modern, responsive interface with Pakistani colors (green and blue) and support for bilingual content (English and Urdu).
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (November 2024)
+
+**Converted to Pure HTML/CSS/JS Prototype**: The application was rebuilt as a static website using vanilla HTML, CSS, and JavaScript to create a simple, lightweight prototype without the complexity of React and build tools.
+
 ## System Architecture
 
 ### Frontend Architecture
 
-The frontend is built as a **Single Page Application (SPA)** using modern React patterns:
+The frontend is built as a **static multi-page website** using pure web technologies:
 
-- **Framework**: React 18 with TypeScript
-- **Routing**: Wouter (lightweight client-side routing)
-- **State Management**: TanStack React Query for server state, React hooks for local state
-- **UI Components**: Radix UI primitives with shadcn/ui component library
-- **Styling**: Tailwind CSS with custom Pakistani-themed color scheme
-- **Form Handling**: React Hook Form with Zod validation via @hookform/resolvers
+- **Pages**: Static HTML files (index.html, lawyers.html, lawyer-profile.html, booking.html, confirmation.html)
+- **Styling**: Custom CSS with Pakistani color scheme (Green: #01611C, Blue: #00509E)
+- **JavaScript**: Vanilla JS for interactivity and data rendering
+- **Fonts**: Google Fonts (Roboto, Open Sans, Noto Nastaliq Urdu)
+- **Data**: Sample lawyer data stored in data.js
+- **State Management**: URL parameters and localStorage for data passing between pages
 
 **Design Decisions**:
-- Chose Wouter over React Router for its minimal bundle size and simplicity
-- Radix UI provides accessible, unstyled primitives allowing full design control
-- TanStack Query handles API caching and synchronization, eliminating need for complex state management
-- Component structure follows atomic design with reusable UI components in `client/src/components/ui/`
+- Simple, static files for easy deployment and fast loading
+- No build process required - files are served directly
+- Responsive design with mobile menu
+- Pakistani color scheme throughout
+- Bilingual support with language toggle (English/Urdu)
 
 ### Backend Architecture
 
-The backend follows a **REST API pattern** with Express.js:
+The backend is a simple **static file server** using Express.js:
 
 - **Framework**: Express.js on Node.js
-- **API Pattern**: RESTful endpoints under `/api` prefix
-- **Storage Layer**: Abstracted through `IStorage` interface with in-memory implementation
-- **Build System**: esbuild for production bundling, tsx for development
+- **Purpose**: Serves static HTML, CSS, and JavaScript files
+- **Location**: All static files are in `server/public/` directory
+- **Port**: Application runs on port 5000
 
 **Design Decisions**:
-- Storage abstraction (`IStorage` interface) allows easy migration from in-memory to database implementation
-- Middleware pattern for logging, error handling, and JSON parsing
-- Development uses Vite middleware for hot module replacement
-- Production serves pre-built static files from `dist/public`
+- Minimal server setup - just serves static files
+- No API endpoints required for prototype
+- No database - all data is in JavaScript files
 
 ### Data Storage
 
-**Current Implementation**: In-memory storage via `MemStorage` class
+**Current Implementation**: Static JavaScript data
 
-**Database Schema** (defined in `shared/schema.ts` using Drizzle ORM):
-- **users**: User authentication (username, password)
-- **lawyers**: Lawyer profiles with bio, specialties, ratings, availability
-- **specializations**: Legal practice areas (family law, corporate, criminal, etc.)
-- **bookings**: Consultation appointments linking lawyers and clients
-- **reviews**: Client reviews for lawyers
+**Data Files**:
+- `server/public/data.js`: Contains sample lawyer data and legal services
+- 8 sample lawyers with complete profiles (name, specializations, experience, location, ratings, etc.)
+- Legal service categories (Family Law, Corporate Law, Criminal Law, Property Law, Civil Litigation, Tax Law)
 
-**Design Decisions**:
-- Drizzle ORM with PostgreSQL dialect for type-safe database operations
-- Schema-first approach with Zod validation generated from Drizzle schemas
-- JSON columns for complex data (languages, specialties, availability schedules)
-- Migration support via drizzle-kit
+**Data Flow**:
+- Lawyer data loaded on page load via script tag
+- URL parameters pass data between pages (e.g., lawyer ID)
+- localStorage stores booking information for confirmation page
 
-**Note**: The application is configured for PostgreSQL (via `@neondatabase/serverless`) but currently uses in-memory storage. Migration to actual database requires:
-1. Setting `DATABASE_URL` environment variable
-2. Running `npm run db:push` to create tables
-3. Updating `server/storage.ts` to use database instead of in-memory storage
+## File Structure
 
-### Build and Development Workflow
+```
+server/
+├── public/              # Static files served to users
+│   ├── index.html       # Homepage with search and featured lawyers
+│   ├── lawyers.html     # Lawyers listing with filters
+│   ├── lawyer-profile.html  # Individual lawyer profile
+│   ├── booking.html     # Booking form
+│   ├── confirmation.html    # Booking confirmation
+│   ├── styles.css       # Main stylesheet with Pakistani theme
+│   ├── data.js          # Lawyer and service data
+│   └── script.js        # Interactive functionality
+├── index.ts             # Express server (serves static files)
+└── vite.ts              # Static file serving configuration
+```
 
-**Development Mode**:
-- Vite dev server for frontend with HMR
-- tsx for hot-reloading Node.js backend
-- Concurrent frontend/backend development on single port
+## Key Features
 
-**Production Build**:
-1. Vite builds React SPA to `dist/public`
-2. esbuild bundles Express server to `dist/index.js`
-3. Server serves static files and API endpoints
+1. **Homepage**
+   - Hero section with search functionality
+   - Legal services overview
+   - Featured lawyers showcase
+   - Statistics section
 
-**Design Decisions**:
-- Vite's fast HMR improves development experience
-- esbuild provides fast production builds with ESM output
-- Monorepo structure with shared code in `shared/` directory
+2. **Lawyers Listing**
+   - Filter by specialization, city, and experience
+   - Responsive lawyer cards with ratings and details
+   - Direct booking and profile viewing
+
+3. **Lawyer Profiles**
+   - Detailed lawyer information
+   - Specializations and achievements
+   - Education and bar council details
+   - Direct booking button
+
+4. **Booking Flow**
+   - Multi-field booking form
+   - Date and time selection
+   - Case category and consultation type
+   - Confirmation page with booking summary
+
+5. **Responsive Design**
+   - Mobile-first approach
+   - Tablet and desktop layouts
+   - Mobile hamburger menu
+   - Touch-friendly interfaces
 
 ## External Dependencies
 
-### Third-Party Services
+**Minimal Dependencies**: The prototype uses mostly vanilla web technologies
 
-**Database**: 
-- Neon Serverless Postgres (via `@neondatabase/serverless`)
-- Connection pooling for serverless environments
-- Environment variable: `DATABASE_URL`
-
-### UI Libraries
-
-- **Radix UI**: Comprehensive suite of accessible UI primitives (accordions, dialogs, dropdowns, etc.)
-- **shadcn/ui**: Pre-styled components built on Radix UI with Tailwind CSS
-- **Lucide React**: Icon library for consistent iconography
-
-### Development Tools
-
-- **Replit Integration**: 
-  - `@replit/vite-plugin-runtime-error-modal` for error overlay
-  - `@replit/vite-plugin-cartographer` for development tooling
-- **TypeScript**: Full type safety across client, server, and shared code
-- **Tailwind CSS**: Utility-first styling with custom configuration
-
-### Form and Data Validation
-
-- **React Hook Form**: Performant form state management
-- **Zod**: Runtime type validation for forms and API data
-- **drizzle-zod**: Automatic Zod schema generation from Drizzle schemas
-
-### API and State Management
-
-- **TanStack React Query**: Server state management with caching, refetching, and background updates
-- **date-fns**: Date manipulation and formatting utilities
-
-### Session Management
-
-- **connect-pg-simple**: PostgreSQL session store for Express (currently unused, ready for authentication implementation)
+- **Google Fonts**: Roboto, Open Sans, Noto Nastaliq Urdu (for bilingual support)
+- **Express.js**: Simple static file server
+- **No build tools required**: Direct file serving
