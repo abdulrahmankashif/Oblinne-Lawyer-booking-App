@@ -48,10 +48,9 @@ const Home = () => {
                       <label className="block text-pakdarkgray text-sm font-semibold mb-1">Legal Service</label>
                       <Select onValueChange={setServiceType} value={serviceType}>
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select area of law" />
+                          <SelectValue placeholder="All areas of law" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">All areas of law</SelectItem>
                           {legalServices.map(service => (
                             <SelectItem key={service.id} value={service.id}>{service.name}</SelectItem>
                           ))}
@@ -62,10 +61,9 @@ const Home = () => {
                       <label className="block text-pakdarkgray text-sm font-semibold mb-1">Location</label>
                       <Select onValueChange={setCity} value={city}>
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select city" />
+                          <SelectValue placeholder="All cities" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">All cities</SelectItem>
                           <SelectItem value="karachi">Karachi</SelectItem>
                           <SelectItem value="lahore">Lahore</SelectItem>
                           <SelectItem value="islamabad">Islamabad</SelectItem>

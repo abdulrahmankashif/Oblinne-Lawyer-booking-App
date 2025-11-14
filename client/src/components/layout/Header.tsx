@@ -29,15 +29,11 @@ const Header = () => {
           </div>
           
           <nav className="hidden md:flex items-center space-x-6">
-            <Link href="/">
-              <a className={`font-opensans font-semibold ${location === "/" ? "text-pakblue" : "text-pakdarkgray"} hover:text-pakgreen transition`}>
-                Home
-              </a>
+            <Link href="/" className={`font-opensans font-semibold ${location === "/" ? "text-pakblue" : "text-pakdarkgray"} hover:text-pakgreen transition`}>
+              Home
             </Link>
-            <Link href="/lawyers">
-              <a className={`font-opensans font-semibold ${location.startsWith("/lawyers") ? "text-pakblue" : "text-pakdarkgray"} hover:text-pakgreen transition`}>
-                Lawyers
-              </a>
+            <Link href="/lawyers" className={`font-opensans font-semibold ${location.startsWith("/lawyers") ? "text-pakblue" : "text-pakdarkgray"} hover:text-pakgreen transition`}>
+              Lawyers
             </Link>
             <a href="#services" className="font-opensans font-semibold text-pakdarkgray hover:text-pakgreen transition">
               Services
@@ -82,15 +78,11 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent side="right">
                 <div className="px-1 py-6 space-y-4">
-                  <Link href="/">
-                    <a className={`block font-opensans font-semibold ${location === "/" ? "text-pakblue" : "text-pakdarkgray"} hover:text-pakgreen`}>
-                      Home
-                    </a>
+                  <Link href="/" className={`block font-opensans font-semibold ${location === "/" ? "text-pakblue" : "text-pakdarkgray"} hover:text-pakgreen`}>
+                    Home
                   </Link>
-                  <Link href="/lawyers">
-                    <a className={`block font-opensans font-semibold ${location.startsWith("/lawyers") ? "text-pakblue" : "text-pakdarkgray"} hover:text-pakgreen`}>
-                      Lawyers
-                    </a>
+                  <Link href="/lawyers" className={`block font-opensans font-semibold ${location.startsWith("/lawyers") ? "text-pakblue" : "text-pakdarkgray"} hover:text-pakgreen`}>
+                    Lawyers
                   </Link>
                   <a href="#services" className="block font-opensans font-semibold text-pakdarkgray hover:text-pakgreen">
                     Services
